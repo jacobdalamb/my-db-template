@@ -21,7 +21,7 @@
 		"astro": "astro",
 		"dev": "astro dev",
 		"start": "astro dev",
-		"build": "astro build",
+		"build": "astro build --remote",
 		"preview": "astro preview",
 		"format": "prettier -w . && biome format --write .",
 		"lint": "biome lint . && astro check",
