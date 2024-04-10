@@ -1,3 +1,4 @@
+import db from "@astrojs/db";
 import vercel from "@astrojs/vercel/serverless";
 import { defineConfig } from "astro/config";
 import { authorUrlString } from "./src/utils/meta";
@@ -11,4 +12,5 @@ export default defineConfig({
 			enabled: true,
 		},
 	}),
+	integrations: [db()],
 });

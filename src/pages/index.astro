@@ -1,5 +1,34 @@
 ---
+import { Author, Comment, db, eq } from "astro:db";
+import { customAlphabet } from "nanoid";
 import Layout from "../layouts/Layout.astro";
+
+if (Astro.request.method === "POST") {
+	// parse form data
+	const formData = await Astro.request.formData();
+	const name = formData.get("author");
+	const content = formData.get("content");
+	const nanoid = customAlphabet("1234567890", 10);
+	const id = nanoid();
+	const authorId = id;
+	function containsOnlyDigits(str) {
+		return !Number.isNaN(str) && !Number.isNaN(Number.parseFloat(str));
+	}
+
+	if (typeof name === "string" && containsOnlyDigits(id)) {
+		await db.insert(Author).values({ id, name });
+	}
+	if (typeof content === "string" && containsOnlyDigits(id)) {
+		await db.insert(Comment).values({ authorId, content });
+	}
+}
+
+// render the new list of comments on each request
+
+const comments = await db
+	.select()
+	.from(Comment)
+	.innerJoin(Author, eq(Comment.authorId, Author.id));
 
 const props = {
 	title: "",
@@ -10,5 +39,26 @@ const props = {
 <Layout {...props}>
   <main>
     <h1>Welcome</h1>
+
+    <form method="POST" style="display: grid">
+      <label for="author">Author</label>
+      <input id="author" name="author" />
+
+      <label for="content">Content</label>
+      <textarea id="content" name="content"></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <h2>Comments</h2>
+
+    {
+      comments.map(({ Author, Comment }) => (
+        <article>
+          <p>Author: {Author.name}</p>
+          <p>{Comment.content}</p>
+        </article>
+      ))
+    }
   </main>
 </Layout>
