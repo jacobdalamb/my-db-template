@@ -4,7 +4,6 @@ import { customAlphabet } from "nanoid";
 import Layout from "../layouts/Layout.astro";
 
 if (Astro.request.method === "POST") {
-	// parse form data
 	const formData = await Astro.request.formData();
 	const name = formData.get("author");
 	const content = formData.get("content");
@@ -22,8 +21,6 @@ if (Astro.request.method === "POST") {
 		await db.insert(Comment).values({ authorId, content });
 	}
 }
-
-// render the new list of comments on each request
 
 const comments = await db
 	.select()
