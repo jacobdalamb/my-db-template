@@ -10,4 +10,4 @@ bun create astro@latest --template jacobdalamb/my-db-template
 
 [![Check code quality](https://github.com/jacobdalamb/my-db-template/actions/workflows/pull_request.yml/badge.svg)](https://github.com/jacobdalamb/my-db-template/actions/workflows/pull_request.yml)
 
-[![Check code quality](https://github.com/jacobdalamb/my-db-template/actions/workflows/_studio.yml/badge.svg)](https://github.com/jacobdalamb/my-db-template/actions/workflows/_studio.yml)
+[![Check studio](https://github.com/jacobdalamb/my-db-template/actions/workflows/_studio.yml/badge.svg)](https://github.com/jacobdalamb/my-db-template/actions/workflows/_studio.yml)
